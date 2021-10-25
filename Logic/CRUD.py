@@ -29,7 +29,6 @@ def get_by_id(id, lista):
 
 def sterge_vanzare(id, lista):
     """
-
     :param id:
     :param lista:
     :return: o lista de vanzari

@@ -7,10 +7,10 @@ def test_adauga_vanzare():
     lista = adauga_vanzare("1", "Singur pe lume", "fictiune", 20, "none", lista)
 
     assert len(lista) == 1
-    assert get_id(get_by_id("1", lista)) == "1"
-    assert get_titlu(get_by_id("1", lista)) == "Singur pe lume"
-    assert get_gen(get_by_id("1", lista)) == "fictiune"
-    assert get_pret(get_by_id("1", lista)) == 20
+    assert get_id(lista[0]) == "1"
+    assert get_titlu(lista[0]) == "Singur pe lume"
+    assert get_gen(lista[0]) == "fictiune"
+    assert get_pret(lista[0]) == 20
     assert get_reducere(get_by_id("1", lista)) == "none"
 
 def test_sterge_vanzare():
@@ -57,9 +57,3 @@ def test_modifica_vanzare():
     assert get_gen(vanzare_neupdatata) == "fictiune"
     assert get_pret(vanzare_neupdatata) == 20
     assert get_reducere(vanzare_neupdatata) == "none"
-
-
-
-
-
-

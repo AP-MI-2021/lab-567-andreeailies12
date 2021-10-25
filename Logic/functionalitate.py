@@ -11,4 +11,3 @@ def vanzare_discount(lista):
         else:
             pret_nou = get_pret(vanzare)
         schimbare_pret(vanzare, pret_nou)
-
