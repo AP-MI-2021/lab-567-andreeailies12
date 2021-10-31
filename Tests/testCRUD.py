@@ -23,9 +23,14 @@ def test_sterge_vanzare():
     assert get_by_id("1", lista) is None
     assert get_by_id("2", lista) is not None
 
-    lista = sterge_vanzare("3", lista)
-    assert len(lista) == 1 # am sters 1, ne a rams lista a doua.
-    assert get_by_id("2", lista) is not None
+    try:
+        lista = sterge_vanzare("3", lista)
+        assert False
+    except ValueError:
+        assert len(lista) == 1 # am sters 1, ne a rams lista a doua.
+        assert get_by_id("2", lista) is not None
+    except Exception:
+        assert False
 
 def test_modifica_vanzare():
     lista = []

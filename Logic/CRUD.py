@@ -1,4 +1,4 @@
-from Domain.vanzari import creeaza_vanzare, get_id
+from Domain.vanzari import creeaza_vanzare, get_id, get_titlu
 
 
 def adauga_vanzare(id, titlu, gen, pret, reducere, lista):
@@ -12,6 +12,8 @@ def adauga_vanzare(id, titlu, gen, pret, reducere, lista):
     :param lista: lista de vanzari
     :return: o lista continand atat elementele vechi, cat si noua vanzare de carte
     """
+    if get_by_id(id, lista) is not None:
+        raise ValueError("Id-ul exista deja!")
     vanzare = creeaza_vanzare(id, titlu, gen, pret, reducere)
     return lista + [vanzare]
 
@@ -27,12 +29,26 @@ def get_by_id(id, lista):
             return vanzare
     return None
 
+def get_by_titlu(titlu, lista):
+    """
+
+    :param titlu:
+    :param lista:
+    :return:
+    """
+    for vanzare in lista:
+        if get_titlu(vanzare) == titlu:
+            return  vanzare
+    return None
+
 def sterge_vanzare(id, lista):
     """
     :param id:
     :param lista:
     :return: o lista de vanzari
     """
+    if get_by_id(id, lista) is None:
+        raise ValueError("Nu exista vreo vanzare cu id-ul dat!")
     return [vanzare for vanzare in lista if get_id(vanzare) != id]
 
 def modifica_vanzare(id, titlu, gen, pret, reducere, lista):
@@ -46,6 +62,8 @@ def modifica_vanzare(id, titlu, gen, pret, reducere, lista):
     :param lista:
     :return:
     """
+    if get_by_id(id, lista) is None:
+        raise ValueError("Nu exista vreo vanzare cu id-ul dat!")
     lista_noua = []
     for vanzare in lista:
         if get_id(vanzare) == id:
