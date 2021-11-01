@@ -40,7 +40,7 @@ def ui_modifica_vanzare(lista):
         titlu = input("Dati  noul titlu al cartii: ")
         gen = input("Dati noul gen al cartii: ")
         pret = float(input('Dati noul pret al cartii: '))
-        reducere = input("Dati noul tip de reducere(none,silver, gold: ")
+        reducere = input("Dati noul tip de reducere(none,silver, gold): ")
         return modifica_vanzare(id, titlu, gen, pret, reducere, lista)
     except ValueError as ve:
         print("Eroare: {}".format(ve))

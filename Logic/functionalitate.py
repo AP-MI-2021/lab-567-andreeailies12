@@ -26,3 +26,5 @@ def modificare_gen(titlu, gen_nou, lista):
             schimbare_gen(vanzare, gen_nou)
         if get_by_titlu(titlu, lista) is None:
             raise ValueError("Nu exista titlul dat!")
+
+

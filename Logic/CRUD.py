@@ -15,6 +15,8 @@ def adauga_vanzare(id, titlu, gen, pret, reducere, lista):
     if get_by_id(id, lista) is not None:
         raise ValueError("Id-ul exista deja!")
     vanzare = creeaza_vanzare(id, titlu, gen, pret, reducere)
+    if pret < 0:
+        raise ValueError("Pretul nu poate fi numar negativ!")
     return lista + [vanzare]
 
 def get_by_id(id, lista):
@@ -40,6 +42,7 @@ def get_by_titlu(titlu, lista):
         if get_titlu(vanzare) == titlu:
             return  vanzare
     return None
+
 
 def sterge_vanzare(id, lista):
     """
