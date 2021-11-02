@@ -31,8 +31,8 @@ def show_all(lista):
 
 def ajutor():
     print("Meniul comenzilor:")
-    print("add, id, titlu, gen, pret, reducere - adauga vanzare")
-    print("update, id, titlu, gen, pret, reducere - modifica vanzare")
+    print("add, id, titlu, gen, pret, reducere(none, silver, gold) - adauga vanzare")
+    print("update, id, titlu, gen, pret, reducere(none, silver, gold) - modifica vanzare")
     print("showAll - afisarea tuturor vanzarilor")
     print("delete, id - sterge vanzarea")
     print("stop - oprirea programului")
