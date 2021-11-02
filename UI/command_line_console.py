@@ -1,5 +1,27 @@
 from Domain.vanzari import to_string
-from Logic.CRUD import adauga_vanzare, modifica_vanzare, sterge_vanzare
+from Logic.CRUD import modifica_vanzare, adauga_vanzare, sterge_vanzare
+
+
+def adaugare(id, titlu, gen, pret, reducere, lista):
+    try:
+        return adauga_vanzare(id, titlu, gen, pret, reducere, lista)
+    except ValueError as ve:
+        print("Eroare: {}". format(ve))
+        return lista
+
+def modificare(id, titlu, gen, pret, reducere, lista):
+    try:
+        return modifica_vanzare(id, titlu, gen, pret, reducere,lista)
+    except ValueError as ve:
+        print("Eroare: {}". format(ve))
+        return lista
+
+def stergere(id, lista):
+    try:
+        return sterge_vanzare(id, lista)
+    except ValueError as ve:
+        print("Eroare: {}". format(ve))
+        return lista
 
 
 def show_all(lista):
@@ -7,37 +29,44 @@ def show_all(lista):
         print(to_string(vanzare))
 
 
-def meniu_help():
-    print("Add, id, titlu, gen, pret, reducere -> Adauga vanzarea")
-    print("Update, id, titlu, gen, pret, reducere -> Modifica vanzarea")
-    print("Delete, id -> Sterge vanzarea")
-    print("ShowAll -> Afiseaza vanzarea din lista")
-    print("Stop -> Se opreste programul")
+def ajutor():
+    print("Meniul comenzilor:")
+    print("add, id, titlu, gen, pret, reducere - adauga vanzare")
+    print("update, id, titlu, gen, pret, reducere - modifica vanzare")
+    print("showAll - afisarea tuturor vanzarilor")
+    print("delete, id - sterge vanzarea")
+    print("stop - oprirea programului")
+    print("Introduceti comanda: ")
 
 
-def menu(lista):
-    while True:
-        optiune = input()
-        if optiune == 'Help':
-            meniu_help()
+def meniu():
+    lista = []
+    lista = adauga_vanzare("1", "Sange de zapada", "politist", 35, "gold", lista)
+    lista = adauga_vanzare("2", "Enigma Otiliei", "bildugsroman", 30, "none", lista)
+    functioneaza = True
+
+    while functioneaza is True:
+        ajutor()
+        alegere = input()
+        if alegere == "help":
+            ajutor()
         else:
-            optiuni = optiune.split(';')
-            if optiuni[0] == 'Stop':
-                break
-            else:
-                for optiune in optiuni:
-                    comenzi = optiune.split(',')
-                    if comenzi[0] == 'Add':
-                        try:
-                            lista = adauga_vanzare(comenzi[1], comenzi[2], comenzi[3], float(comenzi[4]), comenzi[5], lista)
-                        except ValueError as ve:
-                            print('Eroare: ', ve)
-                    elif comenzi[0] == 'ShowAll':
-                        show_all(lista)
-                    elif comenzi[0] == 'Update':
-                        lista = modifica_vanzare(comenzi[1], comenzi[2], comenzi[3], float(comenzi[4]), comenzi[5], lista)
-                    elif comenzi[0] == 'Delete':
-                        lista = sterge_vanzare(comenzi[1], lista)
-                    else:
-                        print("Optiunea este gresita!")
+            comanda_lista = alegere.split(";")
+            optiune = comanda_lista[0]
+            for comanda in comanda_lista[1:]:
+                opt = comanda.split(",")
 
+            if optiune == "add":
+                lista = adaugare(opt[0], opt[1], opt[2], float(opt[3]), opt[4], lista)
+            elif optiune == "update":
+                lista = modificare(opt[0], opt[1], opt[2], float(opt[3]), opt[4], lista)
+            elif optiune == "delete":
+                lista = stergere(opt[0], lista)
+            elif optiune == "showAll":
+                show_all(lista)
+            elif optiune == "stop":
+                functioneaza = False
+            else:
+                print("Comanda gresita! Incercati din nou!")
+
+meniu()

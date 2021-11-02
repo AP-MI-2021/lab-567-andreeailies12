@@ -28,3 +28,6 @@ def modificare_gen(titlu, gen_nou, lista):
             raise ValueError("Nu exista titlul dat!")
 
 
+
+
+
