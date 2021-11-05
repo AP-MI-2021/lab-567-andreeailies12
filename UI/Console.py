@@ -12,46 +12,64 @@ def print_menu():
     print("6. Determinarea prețului minim pentru fiecare gen")
     print("7. Ordonarea vânzărilor crescător după preț")
     print("8. Afișarea numărului de titluri distincte pentru fiecare gen")
+    print("u. Undo")
+    print("r. Redo")
     print("a. Afisare vanzare")
     print("x. Iesire")
 
 
-def ui_adauga_vanzare(lista):
+def ui_adauga_vanzare(lista, undo_list, redo_list):
     try:
         id = input("Dati id ul: ")
         titlu = input("Dati titlul cartii: ")
         gen = input("Dati genul cartii: ")
         pret = float(input("Dati pretul cartii: "))
-        reducere = input ("Dati tipul de reducere(none, silver, gold): ")
-        return adauga_vanzare(id, titlu, gen, pret, reducere, lista)
+        reducere = input("Dati tipul de reducere(none, silver, gold): ")
+
+        rezultat = adauga_vanzare(id, titlu, gen, pret, reducere, lista)
+
+        undo_list.append(lista)
+        redo_list.clear()
+        return rezultat
     except ValueError as ve:
         print('Eroare! Detalii:', ve)
         return lista
 
-def ui_sterge_vanzare(lista):
+
+def ui_sterge_vanzare(lista, undo_list, redo_list):
     try:
         id = input("Dati id ul vanzarii/cartii de sters: ")
-        return sterge_vanzare(id, lista)
+        rezultat = sterge_vanzare(id, lista)
+
+        undo_list.append(lista)
+        redo_list.clear()
+        return rezultat
     except ValueError as ve:
         print("Eroare: {}".format(ve))
         return lista
 
 
-def ui_modifica_vanzare(lista):
+def ui_modifica_vanzare(lista, undo_list, redo_list):
     try:
         id = input("Dati id ul vanzarii de carte de modificat: ")
         titlu = input("Dati  noul titlu al cartii: ")
         gen = input("Dati noul gen al cartii: ")
         pret = float(input('Dati noul pret al cartii: '))
         reducere = input("Dati noul tip de reducere(none,silver, gold): ")
-        return modifica_vanzare(id, titlu, gen, pret, reducere, lista)
+        rezultat = modifica_vanzare(id, titlu, gen, pret, reducere, lista)
+
+        undo_list.append(lista)
+        redo_list.clear()
+        return rezultat
     except ValueError as ve:
         print("Eroare: {}".format(ve))
         return lista
 
+
 def show_all(lista):
     for vanzare in lista:
         print(to_string(vanzare))
+
 
 def console_modificare_gen(lista):
     try:
@@ -64,7 +82,7 @@ def console_modificare_gen(lista):
 
 
 def console_min_pret(lista):
-    rezultat =min_pret(lista)
+    rezultat = min_pret(lista)
     for gen in rezultat:
         print("Genul {} are minimul de pret {}".format(gen, rezultat[gen]))
 
@@ -79,20 +97,27 @@ def console_nr_titluri(lista):
         print("Genul {} are numarul de titluri diferite egal cu {}".format(gen, rezultat[gen]))
 
 
+def ui_vanzare_discount(lista, undo_list, redo_list):
+    undo_list.append(lista)
+    redo_list.clear()
+    return vanzare_discount(lista)
+
 
 def run_menu(lista):
+    undo_list = []
+    redo_list = []
     while True:
         print_menu()
         optiune = input("Dati optiunea: ")
 
         if optiune == "1":
-            lista = ui_adauga_vanzare(lista)
+            lista = ui_adauga_vanzare(lista, undo_list, redo_list)
         elif optiune == "2":
-            lista = ui_sterge_vanzare(lista)
+            lista = ui_sterge_vanzare(lista, undo_list, redo_list)
         elif optiune == "3":
-            lista = ui_modifica_vanzare(lista)
+            lista = ui_modifica_vanzare(lista, undo_list, redo_list)
         elif optiune == "4":
-            vanzare_discount(lista)
+            lista = ui_vanzare_discount(lista, undo_list, redo_list)
         elif optiune == "5":
             console_modificare_gen(lista)
         elif optiune == "6":
@@ -101,6 +126,19 @@ def run_menu(lista):
             console_ord_pret(lista)
         elif optiune == "8":
             console_nr_titluri(lista)
+        elif optiune == "u":
+            redo_list.append(lista)
+            if len(undo_list) > 0:
+                lista = undo_list.pop()
+            else:
+                print("Nu se poate face undo.")
+        elif optiune == "r":
+            undo_list.append(lista)
+            if len(redo_list) > 0:
+                lista = redo_list.pop()
+            else:
+                print("Nu se poate face redo.")
+
         elif optiune == "a":
             show_all(lista)
         elif optiune == "x":

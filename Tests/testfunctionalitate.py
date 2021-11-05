@@ -9,10 +9,12 @@ def test_vanzare_discount():
     lista = adauga_vanzare("2", "Enigma Otiliei", "bildugsroman", 30, "none", lista)
     lista = adauga_vanzare("3", "Micul print", "fantastic", 20, "silver", lista)
 
-    vanzare_discount(lista)
-    assert get_pret(get_by_id("1", lista)) == 31.5
-    assert get_pret(get_by_id("2", lista)) == 30.0
-    assert get_pret(get_by_id("3", lista)) == 19.0
+    #vanzare_discount(lista)
+    lista = vanzare_discount(lista)
+    assert get_pret(lista[0]) == 31.5
+    assert get_pret(lista[1]) == 30.0
+    assert get_pret(lista[2]) == 19.0
+
 
 def test_modificare_gen():
     lista = []
@@ -41,6 +43,7 @@ def test_min_pret():
     assert len(rezultat) == 2
     assert rezultat["politist"] == 20
     assert rezultat["bildugsroman"] == 30
+
 
 def test_ord_cresc():
     lista = []

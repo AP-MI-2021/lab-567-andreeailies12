@@ -67,14 +67,6 @@ def get_reducere(vanzare):
     #return vanzare[4]
     return vanzare["reducere"]
 
-def schimbare_pret(vanzare, pret_nou):
-    """
-    Modifica pretul unei vanzari
-    :param vanzare: pret initial
-    :param pret_nou: noul pret
-    """
-    #vanzare[3] = pret_nou
-    vanzare["pret"] = pret_nou
 
 def schimbare_gen(vanzare, gen_nou):
     """

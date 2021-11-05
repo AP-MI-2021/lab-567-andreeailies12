@@ -1,3 +1,4 @@
+from Logic.CRUD import adauga_vanzare
 from Tests.testall import run_all_test
 from UI.command_line_console import meniu
 from UI.console import run_menu
@@ -15,7 +16,10 @@ def main():
         optiune = input("Dati optiunea: ")
 
         if optiune == "1":
-            print(run_menu([]))
+            lista = []
+            lista = adauga_vanzare("1", "Sange de zapada", "politist", 35, "gold", lista)
+            lista = adauga_vanzare("2", "Enigma Otiliei", "bildugsroman", 30, "none", lista)
+            print(run_menu(lista))
         elif optiune == "2":
             print(meniu())
         elif optiune == "3":
