@@ -1,4 +1,4 @@
-from Domain.vanzari import creeaza_vanzare, get_id, get_titlu
+from Domain.vanzari import creeaza_vanzare, get_id, get_titlu, get_reducere
 
 
 def adauga_vanzare(id, titlu, gen, pret, reducere, lista):
@@ -17,6 +17,8 @@ def adauga_vanzare(id, titlu, gen, pret, reducere, lista):
     vanzare = creeaza_vanzare(id, titlu, gen, pret, reducere)
     if pret < 0:
         raise ValueError("Pretul nu poate fi numar negativ!")
+    if get_reducere(vanzare) != "none" and get_reducere(vanzare) != "silver" and get_reducere(vanzare) != "gold":
+        raise ValueError("Nu exista acest tip de reducere!")
     return lista + [vanzare]
 
 def get_by_id(id, lista):

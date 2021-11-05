@@ -1,6 +1,6 @@
 from Domain.vanzari import to_string
 from Logic.CRUD import adauga_vanzare, sterge_vanzare, modifica_vanzare
-from Logic.functionalitate import vanzare_discount, modificare_gen
+from Logic.functionalitate import vanzare_discount, modificare_gen, min_pret, ord_pret, nr_titluri
 
 
 def print_menu():
@@ -9,6 +9,9 @@ def print_menu():
     print("3. Modificare vanzare")
     print("4. Aplicare discount tuturor vanzarilor. (5% pentru silver, 10% pentru gold)")
     print("5. Modificare gen in functie de titlul dat")
+    print("6. Determinarea prețului minim pentru fiecare gen")
+    print("7. Ordonarea vânzărilor crescător după preț")
+    print("8. Afișarea numărului de titluri distincte pentru fiecare gen")
     print("a. Afisare vanzare")
     print("x. Iesire")
 
@@ -60,6 +63,22 @@ def console_modificare_gen(lista):
         return lista
 
 
+def console_min_pret(lista):
+    rezultat =min_pret(lista)
+    for gen in rezultat:
+        print("Genul {} are minimul de pret {}".format(gen, rezultat[gen]))
+
+
+def console_ord_pret(lista):
+    show_all(ord_pret(lista))
+
+
+def console_nr_titluri(lista):
+    rezultat = nr_titluri(lista)
+    for gen in rezultat:
+        print("Genul {} are numarul de titluri diferite egal cu {}".format(gen, rezultat[gen]))
+
+
 
 def run_menu(lista):
     while True:
@@ -76,6 +95,12 @@ def run_menu(lista):
             vanzare_discount(lista)
         elif optiune == "5":
             console_modificare_gen(lista)
+        elif optiune == "6":
+            console_min_pret(lista)
+        elif optiune == "7":
+            console_ord_pret(lista)
+        elif optiune == "8":
+            console_nr_titluri(lista)
         elif optiune == "a":
             show_all(lista)
         elif optiune == "x":

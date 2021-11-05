@@ -31,10 +31,10 @@ def show_all(lista):
 
 def ajutor():
     print("Meniul comenzilor:")
-    print("add, id, titlu, gen, pret, reducere(none, silver, gold) - adauga vanzare")
-    print("update, id, titlu, gen, pret, reducere(none, silver, gold) - modifica vanzare")
+    print("add - id, titlu, gen, pret, reducere(none, silver, gold) - adauga vanzare")
+    print("update - id, titlu, gen, pret, reducere(none, silver, gold) - modifica vanzare")
     print("showAll - afisarea tuturor vanzarilor")
-    print("delete, id - sterge vanzarea")
+    print("delete - id - sterge vanzarea")
     print("stop - oprirea programului")
     print("Introduceti comanda: ")
 
@@ -57,9 +57,17 @@ def meniu():
                 opt = comanda.split(",")
 
             if optiune == "add":
-                lista = adaugare(opt[0], opt[1], opt[2], float(opt[3]), opt[4], lista)
+                try:
+                    lista = adaugare(opt[0], opt[1], opt[2], float(opt[3]), opt[4], lista)
+                except ValueError as ve:
+                    print("Eroare: {}".format(ve))
+
             elif optiune == "update":
-                lista = modificare(opt[0], opt[1], opt[2], float(opt[3]), opt[4], lista)
+                try:
+                    lista = modificare(opt[0], opt[1], opt[2], float(opt[3]), opt[4], lista)
+                except ValueError as ve:
+                    print("Eroare: {}".format(ve))
+
             elif optiune == "delete":
                 lista = stergere(opt[0], lista)
             elif optiune == "showAll":
@@ -69,4 +77,4 @@ def meniu():
             else:
                 print("Comanda gresita! Incercati din nou!")
 
-meniu()
+#meniu()
