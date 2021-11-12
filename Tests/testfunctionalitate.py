@@ -54,7 +54,7 @@ def test_ord_cresc():
     rezultat = ord_pret(lista)
 
     assert get_id(rezultat[0]) == "3"
-    assert get_id(rezultat[1]) =="2"
+    assert get_id(rezultat[1]) == "2"
     assert get_id(rezultat[3]) == "1"
 
 
@@ -68,11 +68,4 @@ def test_nr_titluri():
 
     assert rezultat["politist"] == 2
     assert rezultat["bildugsroman"] == 1
-
-
-
-
-
-
-
 

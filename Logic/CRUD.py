@@ -21,6 +21,7 @@ def adauga_vanzare(id, titlu, gen, pret, reducere, lista):
         raise ValueError("Nu exista acest tip de reducere!")
     return lista + [vanzare]
 
+
 def get_by_id(id, lista):
     """
     Da cartea/vanzarea cu id ul dat dintr o lista
@@ -33,6 +34,7 @@ def get_by_id(id, lista):
             return vanzare
     return None
 
+
 def get_by_titlu(titlu, lista):
     """
 
@@ -42,7 +44,7 @@ def get_by_titlu(titlu, lista):
     """
     for vanzare in lista:
         if get_titlu(vanzare) == titlu:
-            return  vanzare
+            return vanzare
     return None
 
 
@@ -55,6 +57,7 @@ def sterge_vanzare(id, lista):
     if get_by_id(id, lista) is None:
         raise ValueError("Nu exista vreo vanzare cu id-ul dat!")
     return [vanzare for vanzare in lista if get_id(vanzare) != id]
+
 
 def modifica_vanzare(id, titlu, gen, pret, reducere, lista):
     """
@@ -72,7 +75,7 @@ def modifica_vanzare(id, titlu, gen, pret, reducere, lista):
     lista_noua = []
     for vanzare in lista:
         if get_id(vanzare) == id:
-            vanzare_noua =creeaza_vanzare(id, titlu, gen, pret, reducere)
+            vanzare_noua = creeaza_vanzare(id, titlu, gen, pret, reducere)
             lista_noua.append(vanzare_noua)
         else:
             lista_noua.append(vanzare)

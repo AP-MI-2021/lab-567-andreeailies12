@@ -12,7 +12,7 @@ def vanzare_discount(lista):
     lista_noua = []
     for vanzare in lista:
         if get_reducere(vanzare) == "silver":
-            noua_vanzare =creeaza_vanzare(get_id(vanzare),
+            noua_vanzare = creeaza_vanzare(get_id(vanzare),
         get_titlu(vanzare),
         get_gen(vanzare),
         get_pret(vanzare) - 0.05 * get_pret(vanzare),
@@ -54,16 +54,17 @@ def min_pret(lista):
     :param lista: lista de vanzari
     :return: minimul de pret pentru fiecare gen
     """
-    rezultat = {} # am creat un dictionar ; cheie:gen, valoare:pret
+    rezultat = {}  # am creat un dictionar ; cheie:gen, valoare:pret
     for vanzare in lista:
         gen = get_gen(vanzare)
         pret = get_pret(vanzare)
         if gen in rezultat:
-            if pret < rezultat[gen]: # if min< valoarea cheii gen --> atunci valoare cheii gen va lua valoarea min
+            if pret < rezultat[gen]:  # if min< valoarea cheii gen --> atunci valoare cheii gen va lua valoarea min
                 rezultat[gen] = pret
         else:
                 rezultat[gen] = pret
     return rezultat
+
 
 def ord_pret(lista):
     """
@@ -73,27 +74,22 @@ def ord_pret(lista):
     """
     return sorted(lista, key = get_pret)
 
-def nr_titluri(lista): # algoritmul este asemantor cu cel de min_pret
+
+def nr_titluri(lista):  # algoritmul este asemantor cu cel de min_pret
     """
      Afișarea numărului de titluri distincte pentru fiecare gen
     :param lista:
     :return: numarul de titluri diferite pentru fiecare gen
     """
     numar = 1
-    rezultat = {}#gen cheia,  nr titlu valoare
+    rezultat = {}  #gen cheia,  nr titlu valoare
     for vanzare in lista:
         titlu = get_titlu(vanzare)
         gen = get_gen(vanzare)
         if gen in rezultat:
-            if titlu != rezultat[gen]: # daca titlul nu se afla printre valorile existenta in dictionar
-                numar = numar + 1 # se va adauga la numar / +1
+            if titlu != rezultat[gen]:  # daca titlul nu se afla printre valorile existenta in dictionar
+                numar = numar + 1  # se va adauga la numar / +1
                 rezultat[gen] = numar
         else:
             rezultat[gen] = 1
     return rezultat
-
-
-
-
-
-

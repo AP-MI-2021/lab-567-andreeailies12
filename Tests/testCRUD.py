@@ -13,6 +13,7 @@ def test_adauga_vanzare():
     assert get_pret(lista[0]) == 20
     assert get_reducere(get_by_id("1", lista)) == "none"
 
+
 def test_sterge_vanzare():
     lista = []
     lista = adauga_vanzare("1", "Singur pe lume", "fictiune", 20, "none", lista)
@@ -27,16 +28,17 @@ def test_sterge_vanzare():
         lista = sterge_vanzare("3", lista)
         assert False
     except ValueError:
-        assert len(lista) == 1 # am sters 1, ne a rams lista a doua.
+        assert len(lista) == 1  # am sters 1, ne a rams lista a doua.
         assert get_by_id("2", lista) is not None
     except Exception:
         assert False
+
 
 def test_modifica_vanzare():
     lista = []
     lista = adauga_vanzare("1", "Singur pe lume", "fictiune", 20, "none", lista)
     lista = adauga_vanzare("2", "Inainte sa te cunosc", "fictiune", 20, "none", lista)
-    lista = modifica_vanzare("1", "Sub aceeasi stea", "dragoste", 25, "silver", lista )
+    lista = modifica_vanzare("1", "Sub aceeasi stea", "dragoste", 25, "silver", lista)
 
     vanzare_updatata = get_by_id("1", lista)
     assert get_id(vanzare_updatata) == "1"
@@ -54,7 +56,7 @@ def test_modifica_vanzare():
 
     lista = []
     lista = adauga_vanzare("1", "Singur pe lume", "fictiune", 20, "none", lista)
-    lista = modifica_vanzare("1", "Sub aceeasi stea", "dragoste", 25, "silver")
+    lista = modifica_vanzare("1", "Sub aceeasi stea", "dragoste", 25, "silver", lista)
 
     vanzare_neupdatata = get_by_id("1", lista)
     assert get_id(vanzare_neupdatata) == "1"

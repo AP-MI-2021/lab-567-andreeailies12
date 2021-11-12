@@ -28,8 +28,8 @@ def ui_adauga_vanzare(lista, undo_list, redo_list):
 
         rezultat = adauga_vanzare(id, titlu, gen, pret, reducere, lista)
 
-        undo_list.append(lista)
-        redo_list.clear()
+        undo_list.append(lista)  #doar dupa ce vedem ca nu exista vreo exceptie/ ca nu are ce sa crape, vom adauga la undo_list lista
+        redo_list.clear()  #golesc lista cu clear
         return rezultat
     except ValueError as ve:
         print('Eroare! Detalii:', ve)
@@ -104,7 +104,7 @@ def ui_vanzare_discount(lista, undo_list, redo_list):
 
 
 def run_menu(lista):
-    undo_list = []
+    undo_list = [] # retinem lista de istoricuri ,lista de liste
     redo_list = []
     while True:
         print_menu()
@@ -127,14 +127,14 @@ def run_menu(lista):
         elif optiune == "8":
             console_nr_titluri(lista)
         elif optiune == "u":
-            redo_list.append(lista)
             if len(undo_list) > 0:
+                redo_list.append(lista)  # redo se face la undo
                 lista = undo_list.pop()
             else:
                 print("Nu se poate face undo.")
         elif optiune == "r":
-            undo_list.append(lista)
             if len(redo_list) > 0:
+                undo_list.append(lista)
                 lista = redo_list.pop()
             else:
                 print("Nu se poate face redo.")

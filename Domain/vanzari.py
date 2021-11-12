@@ -18,6 +18,7 @@ def creeaza_vanzare(id, titlu, gen, pret, reducere):
     }
     # return [ id,....]
 
+
 def get_id(vanzare): # ne ajuta ca atunci cand gresim sa ne apara exact gresela, functia.
     """
     Getter pentru id ul  cartii
@@ -75,6 +76,7 @@ def schimbare_gen(vanzare, gen_nou):
     :param gen_nou: noul gen
     """
     vanzare["gen"] = gen_nou
+
 
 def to_string(vanzare):
     return "id: {}, titlu: {}, gen: {}, pret: {}, reducere: {}".format(
