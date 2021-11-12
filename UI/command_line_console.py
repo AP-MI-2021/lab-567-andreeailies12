@@ -37,18 +37,18 @@ def meniu(lista):
     ajutor()
     while True:
         print("help - arata meniul")
-        comanda = input("Dati comanda: ")
-        if comanda == "help":
+        comanda_data = input("Dati comanzile: ")
+        if comanda_data == "help":
             print("Meniul comenzilor:")
             print("add - id, titlu, gen, pret, reducere(none, silver, gold) - adauga vanzare")
             print("update - id, titlu, gen, pret, reducere(none, silver, gold) - modifica vanzare")
             print("showAll - afisarea tuturor vanzarilor")
             print("delete - id - sterge vanzarea")
             print("stop - oprirea programului")
-        elif comanda == "stop":
+        elif comanda_data == "stop":
             break
         else:
-            toate_opt = comanda.split(";")
+            toate_opt = comanda_data.split(";")
             for i in range(len(toate_opt)):
                 opt = toate_opt[i].split(",")
                 if opt[0] == "add":
