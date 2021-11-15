@@ -36,7 +36,6 @@ def ajutor():
 def meniu(lista):
     ajutor()
     while True:
-        print("help - arata meniul")
         comanda_data = input("Dati comanzile: ")
         if comanda_data == "help":
             print("Meniul comenzilor:")
@@ -45,8 +44,7 @@ def meniu(lista):
             print("showAll - afisarea tuturor vanzarilor")
             print("delete - id - sterge vanzarea")
             print("stop - oprirea programului")
-        elif comanda_data == "stop":
-            break
+            print("help - meniul comenzilor")
         else:
             toate_opt = comanda_data.split(";")
             for i in range(len(toate_opt)):
@@ -70,6 +68,15 @@ def meniu(lista):
                     lista = modificare(id, titlu, gen, pret, reducere, lista)
                 elif opt[0] == "showAll":
                     show_all(lista)
+                elif opt[0] == "help":
+                    print("Meniul comenzilor:")
+                    print("add - id, titlu, gen, pret, reducere(none, silver, gold) - adauga vanzare")
+                    print("update - id, titlu, gen, pret, reducere(none, silver, gold) - modifica vanzare")
+                    print("showAll - afisarea tuturor vanzarilor")
+                    print("delete - id - sterge vanzarea")
+                    print("stop - oprirea programului")
+                    print("help - meniul comenzilor")
+                elif opt[0] == "stop":
+                    break
                 else:
                     print("nu exista comanda")
-
